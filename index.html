@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="theme-color" content="#07512f">
+	<title>Nigeria's NAP Documents</title>
+	<style>
+		:root {
+			color-scheme: light;
+			--paper: #eef4ee;
+			--surface: #fffefa;
+			--ink: #193326;
+			--muted: #5f7165;
+			--line: #d4e0d5;
+			--green: #008751;
+			--green-dark: #07512f;
+		}
+
+		* { box-sizing: border-box; }
+
+		body {
+			margin: 0;
+			min-height: 100vh;
+			background: var(--paper);
+			color: var(--ink);
+			font-family: "Avenir Next", Avenir, "Segoe UI", sans-serif;
+		}
+
+		.masthead {
+			border-top: 8px solid var(--green);
+			background: var(--green-dark);
+			color: white;
+		}
+
+		.page {
+			width: min(100% - 40px, 860px);
+			margin: 0 auto;
+			padding: 34px 0 64px;
+		}
+
+		.masthead .page {
+			padding: 44px 0 40px;
+		}
+
+		.site-ticker {
+			overflow: hidden;
+			background: var(--green);
+			color: white;
+		}
+
+		.ticker-track {
+			display: flex;
+			width: max-content;
+			animation: ticker-scroll 28s linear infinite;
+		}
+
+		.ticker-copy {
+			flex: none;
+			padding: 13px 56px 13px 0;
+		}
+
+		.ticker-link {
+			color: inherit;
+			font-size: 17px;
+			font-weight: 500;
+			text-decoration: none;
+			white-space: nowrap;
+		}
+
+		.ticker-link:hover { text-decoration: underline; }
+
+		.ticker-link:focus-visible {
+			outline: 2px solid white;
+			outline-offset: 4px;
+		}
+
+		.site-ticker:hover .ticker-track,
+		.site-ticker:focus-within .ticker-track {
+			animation-play-state: paused;
+		}
+
+		.eyebrow {
+			margin: 0 0 14px;
+			color: #c6e7d2;
+			font-size: 14px;
+			font-weight: 500;
+			letter-spacing: 0.08em;
+			text-transform: uppercase;
+		}
+
+		h1 {
+			margin: 0;
+			font-family: Georgia, "Times New Roman", serif;
+			font-size: clamp(36px, 6vw, 56px);
+			font-weight: 400;
+			line-height: 1.08;
+		}
+
+		.intro {
+			margin: 16px 0 0;
+			color: #e0eee4;
+			font-size: 18px;
+			line-height: 1.6;
+		}
+
+		.reader-list {
+			border-top: 1px solid var(--line);
+		}
+
+		.reader {
+			display: grid;
+			grid-template-columns: 52px 112px minmax(0, 1fr) auto;
+			align-items: center;
+			gap: 20px;
+			min-height: 188px;
+			padding: 20px 4px;
+			background: var(--surface);
+			border-bottom: 1px solid var(--line);
+			animation: arrive 420ms ease both;
+		}
+
+		.reader:nth-child(2) { animation-delay: 70ms; }
+		.reader:nth-child(3) { animation-delay: 140ms; }
+
+		.preview-link {
+			display: block;
+			width: 112px;
+			height: 148px;
+			overflow: hidden;
+			border: 1px solid var(--line);
+			background: white;
+			box-shadow: 0 3px 10px rgb(25 51 38 / 10%);
+			transition: box-shadow 160ms ease, transform 160ms ease;
+		}
+
+		.preview-link:hover {
+			transform: translateY(-2px);
+			box-shadow: 0 7px 16px rgb(25 51 38 / 16%);
+		}
+
+		.preview-link:focus-visible {
+			outline: 3px solid #d88b60;
+			outline-offset: 3px;
+		}
+
+		.preview {
+			display: block;
+			width: 100%;
+			height: 100%;
+			object-fit: contain;
+		}
+
+		.number {
+			display: grid;
+			width: 48px;
+			aspect-ratio: 1;
+			place-items: center;
+			border: 1px solid #b8d5c2;
+			border-radius: 50%;
+			color: var(--green);
+			background: #f2f8f3;
+			font-family: Georgia, "Times New Roman", serif;
+			font-size: 20px;
+		}
+
+		.reader h2 {
+			margin: 0 0 5px;
+			font-family: Georgia, "Times New Roman", serif;
+			font-size: 22px;
+			font-weight: 400;
+		}
+
+		.reader p {
+			margin: 0;
+			color: var(--muted);
+			font-size: 15px;
+		}
+
+		.reader .preview-caption {
+			font-size: 14px;
+		}
+
+		.actions {
+			display: flex;
+			align-items: center;
+			gap: 10px;
+		}
+
+		.action {
+			display: inline-flex;
+			min-height: 42px;
+			align-items: center;
+			justify-content: center;
+			padding: 0 15px;
+			border: 1px solid var(--green);
+			border-radius: 4px;
+			background: var(--green);
+			color: white;
+			font-size: 15px;
+			font-weight: 500;
+			text-decoration: none;
+			transition: background-color 140ms ease, color 140ms ease, border-color 140ms ease;
+		}
+
+		.action:hover {
+			border-color: var(--green-dark);
+			background: var(--green-dark);
+			color: white;
+		}
+
+		.action:focus-visible {
+			outline: 3px solid #d88b60;
+			outline-offset: 3px;
+		}
+
+		.action--download {
+			border-color: transparent;
+			background: transparent;
+			color: var(--green-dark);
+		}
+
+		.action--download:hover {
+			border-color: #b8d5c2;
+			background: #e6f1e8;
+			color: var(--green-dark);
+		}
+
+		footer {
+			margin-top: 25px;
+			color: var(--muted);
+			font-size: 14px;
+		}
+
+		@keyframes arrive {
+			from { opacity: 0; transform: translateY(8px); }
+			to { opacity: 1; transform: translateY(0); }
+		}
+
+		@keyframes ticker-scroll {
+			to { transform: translateX(-50%); }
+		}
+
+		@media (max-width: 600px) {
+			.page { padding-top: 28px; }
+			.masthead .page { padding-top: 38px; }
+
+			.reader {
+				grid-template-columns: 42px 80px minmax(0, 1fr);
+				gap: 12px;
+				padding: 18px 0;
+			}
+
+			.number { width: 40px; }
+			.preview-link { width: 80px; height: 110px; }
+			.actions { grid-column: 3; }
+			.action { min-height: 40px; padding: 0 12px; }
+		}
+
+		@media (prefers-reduced-motion: reduce) {
+			*, *::before, *::after {
+				animation-duration: 0.01ms !important;
+				animation-iteration-count: 1 !important;
+				scroll-behavior: auto !important;
+				transition-duration: 0.01ms !important;
+			}
+
+			.ticker-track { transform: none; }
+		}
+	</style>
+</head>
+<body>
+	<header class="masthead">
+		<div class="page">
+			<p class="eyebrow">Nigeria | Climate Policy Documents</p>
+			<h1>Nigeria's NAP, NAP Global & GCCM</h1>
+			<p class="intro">Choose a reader to view in your browser or save as a PDF.</p>
+		</div>
+	</header>
+	<!-- <aside class="site-ticker" aria-label="Department of Climate Change website">
+		<div class="ticker-track">
+			<div class="ticker-copy">
+				<a class="ticker-link" href="http://climatechange.environment.gov.ng" target="_blank" rel="noopener noreferrer">
+				For more information on Nigeria's climate change policies, visit the Department of Climate Change website at climatechange.environment.gov.ng
+				</a>
+			</div>
+			<div class="ticker-copy" aria-hidden="true">
+				<a class="ticker-link" href="http://climatechange.environment.gov.ng" tabindex="-1">
+					Department of Climate Change | Visit climatechange.environment.gov.ng
+				</a>
+			</div>
+		</div>
+	</aside> -->
+	<main class="page">
+
+		<section class="reader-list" aria-label="Available readers">
+			<article class="reader">
+				<span class="number" aria-hidden="true">01</span>
+				<a class="preview-link" href="NAP_REPORT.pdf" target="_blank" rel="noopener" aria-label="Preview the first page of Nigeria's NAP PDF">
+					<img class="preview" src="previews/nap_preview.png" alt="First page preview of Nigeria's NAP">
+				</a>
+				<div>
+					<h2>Nigeria's National Adaptation Plan </h2>
+					<p class="preview-caption">PDF document · first page preview</p>
+				</div>
+				<div class="actions">
+					<a class="action" href="NAP_REPORT.pdf" target="_blank" rel="noopener">View PDF</a>
+					<a class="action action--download" href="NAP_REPORT.pdf" download>Download</a>
+				</div>
+			</article>
+
+			<article class="reader">
+				<span class="number" aria-hidden="true">02</span>
+				<a class="preview-link" href="nigeria-conflict-peacebuilding-v7.pdf" target="_blank" rel="noopener" aria-label="Preview the first page of nigeria conflict peacebuilding PDF">
+					<img class="preview" src="previews/nigeria-conflict-peacebuilding.png" alt="First page preview of GCCM">
+				</a>
+				<div>
+					<h2>Integrating Conflict Sensitivity and
+Peacebuilding Into Nigeria’s National
+Adaptation Plan Process</h2>
+					<p class="preview-caption">PDF document · first page preview</p>
+				</div>
+				<div class="actions">
+					<a class="action" href="nigeria-conflict-peacebuilding-v7.pdf" target="_blank" rel="noopener">View PDF</a>
+					<a class="action action--download" href="nigeria-conflict-peacebuilding-v7.pdf" download>Download</a>
+				</div>
+			</article>
+
+			<article class="reader">
+				<span class="number" aria-hidden="true">03</span>
+				<a class="preview-link" href="Nigeria-Adaptation-Communication-UNFCCC-2.pdf" target="_blank" rel="noopener" aria-label="Preview the first page of NAP Global PDF">
+					<img class="preview" src="previews/Nigeria-Adaptation-Communication-UNFCCC-2.png" alt="First page preview of NAP Global">
+				</a>
+				<div>
+					<h2>Adaptation Communication to the United Nations Framework Convention on Climate Change</h2>
+					<p class="preview-caption">PDF document · first page preview</p>
+				</div>
+				<div class="actions">
+					<a class="action" href="Nigeria-Adaptation-Communication-UNFCCC-2.pdf" target="_blank" rel="noopener">View PDF</a>
+					<a class="action action--download" href="Nigeria-Adaptation-Communication-UNFCCC-2.pdf" download>Download</a>
+				</div>
+			</article>
+			<article class="reader">
+				<span class="number" aria-hidden="true">04</span>
+				<a class="preview-link" href="napgn-en-2020-Nigeria-National-Adaptation-Plan-NAP-Framework.pdf" target="_blank" rel="noopener" aria-label="Preview the first page of the Others PDF">
+					<img class="preview" src="previews/Nigeria_nap_framework.png" alt="First page preview of the Others document">
+				</a>
+				<div>
+					<h2>Nigeria's National Adaptation Plan Framework</h2>
+					<p class="preview-caption">PDF document · first page preview</p>
+				</div>
+				<div class="actions">
+					<a class="action" href="napgn-en-2020-Nigeria-National-Adaptation-Plan-NAP-Framework.pdf" target="_blank" rel="noopener">View PDF</a>
+					<a class="action action--download" href="napgn-en-2020-Nigeria-National-Adaptation-Plan-NAP-Framework.pdf" download>Download</a>
+				</div>
+			</article>
+		</section>
+
+		<footer> <span class="muted"> Viewers can also download the PDF files for offline reading. </span>
+            <br>
+        <a href="https://climatechange.environment.gov.ng/" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: #196903;">Visit the Department of Climate Change website</a>
+        </footer>
+	</main>
+</body>
+</html>
